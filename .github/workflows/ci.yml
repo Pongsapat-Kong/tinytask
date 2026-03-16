@@ -106,8 +106,8 @@ jobs:
             context: .
             push: true
             tags: |
-                anunpanya/tinytask:latest
-                anunpanya/tinytask:${{ github.sha }}
+                ${{ secrets.DOCKERHUB_USERNAME }}/tinytask:latest
+                ${{ secrets.DOCKERHUB_TOKEN }}/tinytask:${{ github.sha }}
 
         
 
