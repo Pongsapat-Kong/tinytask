@@ -46,6 +46,8 @@ jobs:
           name: dist
           path: dist/
 
+
+
   docker-smoke-test:
     # This job depends on the successful completion of the build-and-test job
     needs: build-and-test
@@ -92,18 +94,24 @@ jobs:
           docker logs taskboard-app
           docker stop taskboard-app
           docker rm taskboard-app
-
-          - name: Login to Docker Hub
-            uses: docker/login-action@v3
-            with:
+      # 11. Stop and remove the Docker container
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
             username: ${{ secrets.DOCKERHUB_USERNAME }}
             password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-            - name: Build and push Docker image
-            uses: docker/build-push-action@v5
-            with:
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
             context: .
             push: true
             tags: |
-                ${{ secrets.DOCKERHUB_USERNAME }}/tinytask:latest
-                ${{ secrets.DOCKERHUB_USERNAME }}/tinytask:${{ github.sha }}
+                anunpanya/tinytask:latest
+                anunpanya/tinytask:${{ github.sha }}
+
+        
+
+
+
+
+    
